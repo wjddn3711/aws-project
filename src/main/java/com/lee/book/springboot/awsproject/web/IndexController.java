@@ -1,5 +1,6 @@
 package com.lee.book.springboot.awsproject.web;
 
+import com.lee.book.springboot.awsproject.config.auth.LoginUser;
 import com.lee.book.springboot.awsproject.config.auth.dto.SessionUser;
 import com.lee.book.springboot.awsproject.service.posts.PostsService;
 import com.lee.book.springboot.awsproject.web.dto.PostsResponseDto;
@@ -18,12 +19,10 @@ import javax.servlet.http.HttpSession;
 public class IndexController {
 
     private final PostsService postsService;
-    private final HttpSession httpSession;
 
     @GetMapping("/")
-    public String index(Model model){
+    public String index(Model model, @LoginUser SessionUser user){
         model.addAttribute("posts",postsService.findAllDesc());
-        SessionUser user = (SessionUser) httpSession.getAttribute("user");
 
         if (user!=null){
             model.addAttribute("userName",user.getName());
