@@ -9,5 +9,4 @@ class AwsProjectApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }
